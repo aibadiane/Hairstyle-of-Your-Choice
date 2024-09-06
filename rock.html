@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="with=device-width, initial-scale=1.0">
-    <title> Hairstyles of Your Choice </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Your Style Generator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
 <section class="sub-header">
@@ -15,7 +15,7 @@
         <div class="nav-links">
             <ul>
                 <li><a href="items.html">HOME</a></li>
-                <li><a href ="rock.html" >ROCK YOUR STYLE</a><li>
+                <li><a href="rock.html">ROCK YOUR STYLE</a></li>
                 <li><a href="tips.html">TIPS</a></li>
                 <li><a href="about.html">ABOUT ME</a></li>
                 <li><a href="contact.html">CONTACT INFO</a></li>
@@ -24,24 +24,65 @@
     </nav>
     <div class="about">
         <div class="headre"><h1>Rock Your Style Generator</h1></div>
-    <div class="body">
-        <p> Here you will be given a hairstyle based of your answers </p></div>
+        <div class="body">
+            <p>Here you will be given a hairstyle based on your answers</p>
+            <form action="/rock" method="post">
+                <label for="duration">Do you want your hairstyle to last less than or more than two weeks?</label>
+                <select id="duration" name="duration" required>
+                    <option value="less">Less than two weeks</option>
+                    <option value="more">More than two weeks</option>
+                </select>
+                
+                <div id="style-options" style="display: none;">
+                    <label for="style_type">Do you want a natural look or a non-natural style?</label>
+                    <select id="style_type" name="style_type">
+                        <option value="natural">Natural</option>
+                        <option value="non-natural">Non-Natural</option>
+                    </select>
 
+                    <label for="maintenance">Do you care about the maintenance of the hair?</label>
+                    <select id="maintenance" name="maintenance">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div id="length-options" style="display: none;">
+                    <label for="length">Would you like the length to be long or short?</label>
+                    <select id="length" name="length">
+                        <option value="long">Long</option>
+                        <option value="short">Short</option>
+                    </select>
+                </div>
+
+                <button type="submit">Get Recommendation</button>
+            </form>
+            {% if recommendation %}
+                <h2>Recommended Hairstyle:</h2>
+                <p>{{ recommendation }}</p>
+            {% endif %}
+        </div>
     </div>
 </section>
-
-<!----Tips---->
-
-    
-
 
 <!----footer---->
 <section class="footer">
      <p>Made by Aiba Diane <i class="fa fa-heart-o"></i></p>
-
 </section>
 
-
+<script>
+    document.getElementById('duration').addEventListener('change', function() {
+        var styleOptions = document.getElementById('style-options');
+        var lengthOptions = document.getElementById('length-options');
+        if (this.value === 'less') {
+            styleOptions.style.display = 'block';
+            lengthOptions.style.display = 'none';
+        } else {
+            styleOptions.style.display = 'none';
+            lengthOptions.style.display = 'block';
+        }
+    });
+</script>
 
 </body>
 </html>
